@@ -1,38 +1,24 @@
-package com.pack1;
+//package com.pack1;
 
 import java.util.Scanner;
 
 public class MatrixSum {
 
 	public static void main(String[] args) {
-		/*int a[][] = {{1,2,3,4},{5,6,7,8}};
-		int sum = 0;
+		int a[][] = {{1,2,0},{5,6,7}};
+		int b[][] = {{2,4,6},{4,1,2}};
+		int c[][] = new int[2][3];
+		
 		for(int i = 0; i < 2; i++) {
-			for(int j = 0; j < 4; j++) {
-				System.out.print(a[i][j]+" ");
-				sum += a[i][j];
+			for(int j = 0; j < 3; j++) {
+				c[i][j] = a[i][j]+b[i][j];
+				System.out.print(c[i][j]+" ");
 			}
 			System.out.println();
+			
 		}
-		System.out.println("Sum of Matrix is : "+sum);
-		*/
-		Scanner sc = new Scanner(System.in);
-		int a[][] = new int[3][3];
-		for(int i = 0; i<a.length;i++) {
-			for(int j = 0; j<a.length; j++) {
-			a[i][j] = sc.nextInt();
-		 }
-		}
-		int sum = 0;
-		for(int i = 0; i<a.length; i++) {
-			for(int j = 0; j<a.length; j++) {
-				System.out.print(a[i][j]+" ");
-				sum += a[i][j];
+		
+		
 			}
-			System.out.println();
-		}
-		System.out.println("Sum of Matrix is : "+sum);
-		sc.close();
-	}
 
 }
