@@ -9,10 +9,10 @@ public class SubArray {
 		if(indexStart<0 || indexEnd>=arr.length || indexStart>indexEnd ) {
 			System.out.println("invalid indexes");
 		}
-		
-		for(int i = indexStart; i<indexEnd; i++) {
+		else{
+		for(int i = indexStart; i<indexEnd; i++) 
 				System.out.print(arr[i] + " ");
-			}
+		    }
 		}
 	}
 
