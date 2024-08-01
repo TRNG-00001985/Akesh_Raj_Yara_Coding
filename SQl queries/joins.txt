@@ -25,33 +25,71 @@ insert into Employees(EmployeeName,DepartmentID) values ('John',1),('Jane',2),('
 insert into Departments(DepartmentID,DepartmentName) values(1,'Sales'),(2,'HR'),(3,'IT'),(4,'Marketing'),(5,null);
 insert into Projects(ProjectID,ProjectName,DepartmentID) values (101,'Project A',1),(102,'Project B',2),(103,'Project C',3),(104,'Project D',4),(105,'Project E',null);
 
--- Retrieve the list of employees along with their department names where employees are associated with departments.
-select e.EmployeeID,e.EmployeeName,d.DepartmentName from Employees e  JOIN Departments d ON e.DepartmentID=d.DepartmentID;
- -- Retrieve all employees and their associated department names. If an employee does not belong to a department, show NULL.
-select e.EmployeeID,e.EmployeeName,d.DepartmentName from Employees e  LEFT JOIN Departments d ON e.DepartmentID=d.DepartmentID; 
--- Retrieve all departments and the names of employees in those departments. If a department does not have any employees, show NULL.
-select d.DepartmentID,d.DepartmentName,e.EmployeeName from Departments d left join Employees e On d.DepartmentID=e.DepartmentID;
--- Retrieve all possible combinations of employees and projects.
-select * from Employees cross join Projects ;
--- Retrieve the list of employees whose department ID is greater than the department ID of 'HR' department.
 
-SET @HR_DepartmentID = (SELECT DepartmentID FROM Departments WHERE DepartmentName = 'HR');
-SELECT e.EmployeeID,e.EmployeeName,e.DepartmentID
-FROM Employees e
-WHERE e.DepartmentID > @HR_DepartmentID;
-    
--- Retrieve the list of projects along with their department names, where the projects are associated with departments
-select p.ProjectID,p.ProjectName,p.DepartmentID from Projects p JOIN Departments d ON p.DepartmentID=d.DepartmentID;
--- Find employees who are not assigned to any department
+-- 1.Retrieve the list of employees along with their department names where employees are associated with departments.
 
-SET @DepId =(SELECT DepartmentID from Departments Where DepartmentName is null);
 
-select e.EmployeeName,e.EmployeeID from Employees e where e.DepartmentID=@DepId;
--- Find departments that have no employees
-select d.DepartmentName, d.DepartmentID from Departments d Left join Employees e ON d.DepartmentID=e.DepartmentID 
-where e.EmployeeID is null;
--- Find all departments along with the number of employees in each department
-SELECT d.DepartmentID, d.DepartmentName, COUNT(e.EmployeeID) AS NumberOfEmployees
-FROM Departments d
-LEFT JOIN Employees e ON d.DepartmentID = e.DepartmentID
-GROUP BY d.DepartmentID, d.DepartmentName;
+select EmployeeName, DepartmentName from Employees inner join Departments on Employees.DepartmentId=Departments.DepartmentId;
+
+
+-- 2.Retrieve all employees and their associated department names. If an employee does not belong to a department, show NULL.
+
+select EmployeeName, DepartmentName from Employees left join Departments on Employees.DepartmentId=Departments.DepartmentId;
+
+
+-- 3.Retrieve all departments and the names of employees in those departments. If a department does not have any employees, show NULL.
+
+SELECT DepartmentName, EmployeeName
+FROM Departments
+LEFT JOIN Employees ON Departments.DepartmentID = Employees.DepartmentID;
+
+
+--4.Retrieve all possible combinations of employees and projects
+
+SELECT EmployeeName, ProjectName
+FROM Employees
+CROSS JOIN Projects;
+
+
+--5.Retrieve the list of employees whose department ID is greater than the department ID of 'HR' department.
+
+SELECT Employees.EmployeeName
+FROM Employees
+INNER JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+WHERE Employees.DepartmentID > (SELECT DepartmentID FROM Departments WHERE DepartmentName = 'HR');
+
+
+-- 6.Retrieve the list of projects along with their department names, where the projects are associated with departments
+
+
+SELECT Projects.ProjectName, Departments.DepartmentName
+FROM Projects
+INNER JOIN Departments ON Projects.DepartmentID = Departments.DepartmentID;
+
+
+-- 7.Find employees who are not assigned to any department
+
+
+
+SELECT Employees.EmployeeName
+FROM Employees
+LEFT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+WHERE Departments.DepartmentID IS NULL;
+
+
+-- 8.Find departments that have no employees
+
+
+SELECT Employees.EmployeeName
+FROM Employees
+LEFT JOIN Departments ON Employees.DepartmentID = Departments.DepartmentID
+WHERE Departments.DepartmentID IS NULL;
+
+
+-- 9.Find all departments along with the number of employees in each department
+
+
+SELECT Departments.DepartmentName
+FROM Departments
+LEFT JOIN Employees ON Departments.DepartmentID = Employees.DepartmentID
+WHERE Employees.DepartmentID IS NULL;
