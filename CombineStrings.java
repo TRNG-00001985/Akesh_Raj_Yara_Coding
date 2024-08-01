@@ -1,4 +1,4 @@
-package com.pack1;
+//package com.pack1;
 
 public class CombineStrings {
 

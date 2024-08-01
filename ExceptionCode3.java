@@ -1,8 +1,4 @@
-package demo1;
-
-import java.io.Exception;
-
-
+//package demo1;
 class CustomException extends Exception{
 	public CustomException(String message) {
 		super(message);

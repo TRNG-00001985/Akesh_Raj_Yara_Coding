@@ -1,4 +1,4 @@
-package demo1;
+//package demo1;
 
 public class EncapsulationCode {
 	private String name;

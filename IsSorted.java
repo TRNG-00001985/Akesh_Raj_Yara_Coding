@@ -1,4 +1,4 @@
-package com.pack1;
+//package com.pack1;
 
 public class IsSorted {
 	public static void main(String[] args) {

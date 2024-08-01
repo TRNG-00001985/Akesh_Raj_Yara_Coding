@@ -1,4 +1,4 @@
-package com.pack1;
+///package com.pack1;
 
 public class PrimeOrComposite {
 public static void main(String args[])
